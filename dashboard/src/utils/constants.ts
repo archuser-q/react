@@ -1,4 +1,4 @@
-import type { UserStatus } from '#/types/auth'
+import type { UserRole, UserStatus } from '#/types/auth'
 import type { Availability, DocStatus, DocType, VerificationStatus } from '#/types/worker'
 import type {
   ComplaintStatus,
@@ -210,3 +210,31 @@ export const ORDER_CANCEL_REASONS = [
   'Đơn đặt trùng',
   'Thông tin đơn không chính xác',
 ]
+
+// ---------- Khiếu nại ----------
+
+// Giống SLA ở API /dashboard/pending-tasks: khiếu nại mới 24 giờ, đang xử lý 72 giờ
+export const COMPLAINT_SLA_HOURS: Partial<Record<ComplaintStatus, number>> = {
+  open: 24,
+  processing: 72,
+}
+
+export const USER_ROLE_LABEL: Record<UserRole, string> = {
+  customer: 'Khách hàng',
+  worker: 'Thợ',
+  admin: 'Quản trị viên',
+}
+
+export const COMPLAINT_RESOLUTION_TEMPLATES = {
+  resolved: [
+    'Đã yêu cầu thợ quay lại xử lý miễn phí',
+    'Đã hoàn tiền một phần cho khách hàng',
+    'Đã hoàn tiền toàn bộ cho khách hàng',
+    'Đã nhắc nhở và trừ điểm tin cậy của thợ',
+  ],
+  rejected: [
+    'Không đủ bằng chứng để xác minh khiếu nại',
+    'Dịch vụ đã được thực hiện đúng như mô tả',
+    'Khiếu nại gửi sau thời hạn bảo hành',
+  ],
+}

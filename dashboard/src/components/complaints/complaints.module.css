@@ -1,0 +1,26 @@
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.blockTitle {
+  margin: 0 !important;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.result {
+  margin-top: 6px;
+  padding: 12px 14px;
+  border-left: 3px solid #2e8b57;
+  border-radius: 6px;
+  background: #f4f5f2;
+}
