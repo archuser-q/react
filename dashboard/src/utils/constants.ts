@@ -1,3 +1,5 @@
+import type { UserStatus } from '#/types/auth'
+import type { Availability, DocStatus, DocType, VerificationStatus } from '#/types/worker'
 import type {
   ComplaintStatus,
   KpiKey,
@@ -109,4 +111,52 @@ export const KPI_GROUPS: { title: string; items: KpiDef[] }[] = [
       { key: 'new_workers', label: 'Thợ mới', format: 'number' },
     ],
   },
+]
+
+// ---------- Khách hàng và thợ ----------
+
+export const PAGE_SIZE = 20
+
+export const USER_STATUS: Record<UserStatus, { label: string; color: string }> = {
+  active: { label: 'Đang hoạt động', color: 'success' },
+  blocked: { label: 'Đã khóa', color: 'error' },
+  pending: { label: 'Chờ kích hoạt', color: 'warning' },
+}
+
+export const VERIFICATION_STATUS: Record<VerificationStatus, { label: string; color: string }> = {
+  pending: { label: 'Chờ duyệt', color: 'gold' },
+  approved: { label: 'Đã duyệt', color: 'success' },
+  rejected: { label: 'Bị từ chối', color: 'error' },
+}
+
+export const AVAILABILITY: Record<
+  Availability,
+  { label: string; status: 'success' | 'warning' | 'default' }
+> = {
+  online: { label: 'Sẵn sàng nhận đơn', status: 'success' },
+  busy: { label: 'Đang làm đơn', status: 'warning' },
+  offline: { label: 'Ngoại tuyến', status: 'default' },
+}
+
+export const DOC_TYPE: Record<DocType, string> = {
+  id_card_front: 'CCCD mặt trước',
+  id_card_back: 'CCCD mặt sau',
+  portrait: 'Ảnh chân dung',
+  certificate: 'Chứng chỉ nghề',
+}
+
+export const DOC_STATUS: Record<DocStatus, { label: string; color: string }> = {
+  pending: { label: 'Chờ duyệt', color: 'gold' },
+  approved: { label: 'Hợp lệ', color: 'success' },
+  rejected: { label: 'Không hợp lệ', color: 'error' },
+}
+
+export const REQUIRED_DOCS: DocType[] = ['id_card_front', 'id_card_back', 'portrait']
+
+export const DOC_REJECT_REASONS = [
+  'Ảnh bị mờ, không đọc được thông tin',
+  'Thông tin không khớp với tài khoản',
+  'Giấy tờ đã hết hạn',
+  'Ảnh bị cắt, thiếu góc',
+  'Không phải giấy tờ được yêu cầu',
 ]

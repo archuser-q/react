@@ -14,6 +14,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as PrototypeRouteImport } from './routes/prototype'
 import { Route as AdminIndexRouteImport } from './routes/_admin/index'
 import { Route as AdminComplaintsRouteImport } from './routes/_admin/complaints'
+import { Route as AdminCustomersRouteImport } from './routes/_admin/customers'
 import { Route as AdminOrdersRouteImport } from './routes/_admin/orders'
 import { Route as AdminOverviewRouteImport } from './routes/_admin/overview'
 import { Route as AdminPaymentsRouteImport } from './routes/_admin/payments'
@@ -22,6 +23,8 @@ import { Route as AdminServicesRouteImport } from './routes/_admin/services'
 import { Route as AdminSettingsRouteImport } from './routes/_admin/settings'
 import { Route as AdminUsersRouteImport } from './routes/_admin/users'
 import { Route as AdminWorkersRouteImport } from './routes/_admin/workers'
+import { Route as AdminWorkersIndexRouteImport } from './routes/_admin/workers/index'
+import { Route as AdminWorkersWorkerIdRouteImport } from './routes/_admin/workers/$workerId'
 
 const AdminRoute = AdminRouteImport.update({
   id: '/_admin',
@@ -45,6 +48,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
 const AdminComplaintsRoute = AdminComplaintsRouteImport.update({
   id: '/complaints',
   path: '/complaints',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCustomersRoute = AdminCustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminOrdersRoute = AdminOrdersRouteImport.update({
@@ -87,12 +95,23 @@ const AdminWorkersRoute = AdminWorkersRouteImport.update({
   path: '/workers',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminWorkersIndexRoute = AdminWorkersIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminWorkersRoute,
+} as any)
+const AdminWorkersWorkerIdRoute = AdminWorkersWorkerIdRouteImport.update({
+  id: '/$workerId',
+  path: '/$workerId',
+  getParentRoute: () => AdminWorkersRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AdminIndexRoute
   '/login': typeof LoginRoute
   '/prototype': typeof PrototypeRoute
   '/complaints': typeof AdminComplaintsRoute
+  '/customers': typeof AdminCustomersRoute
   '/orders': typeof AdminOrdersRoute
   '/overview': typeof AdminOverviewRoute
   '/payments': typeof AdminPaymentsRoute
@@ -100,12 +119,15 @@ export interface FileRoutesByFullPath {
   '/services': typeof AdminServicesRoute
   '/settings': typeof AdminSettingsRoute
   '/users': typeof AdminUsersRoute
-  '/workers': typeof AdminWorkersRoute
+  '/workers': typeof AdminWorkersRouteWithChildren
+  '/workers/$workerId': typeof AdminWorkersWorkerIdRoute
+  '/workers/': typeof AdminWorkersIndexRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/prototype': typeof PrototypeRoute
   '/complaints': typeof AdminComplaintsRoute
+  '/customers': typeof AdminCustomersRoute
   '/orders': typeof AdminOrdersRoute
   '/overview': typeof AdminOverviewRoute
   '/payments': typeof AdminPaymentsRoute
@@ -113,8 +135,9 @@ export interface FileRoutesByTo {
   '/services': typeof AdminServicesRoute
   '/settings': typeof AdminSettingsRoute
   '/users': typeof AdminUsersRoute
-  '/workers': typeof AdminWorkersRoute
   '/': typeof AdminIndexRoute
+  '/workers/$workerId': typeof AdminWorkersWorkerIdRoute
+  '/workers': typeof AdminWorkersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -122,6 +145,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/prototype': typeof PrototypeRoute
   '/_admin/complaints': typeof AdminComplaintsRoute
+  '/_admin/customers': typeof AdminCustomersRoute
   '/_admin/orders': typeof AdminOrdersRoute
   '/_admin/overview': typeof AdminOverviewRoute
   '/_admin/payments': typeof AdminPaymentsRoute
@@ -129,8 +153,10 @@ export interface FileRoutesById {
   '/_admin/services': typeof AdminServicesRoute
   '/_admin/settings': typeof AdminSettingsRoute
   '/_admin/users': typeof AdminUsersRoute
-  '/_admin/workers': typeof AdminWorkersRoute
+  '/_admin/workers': typeof AdminWorkersRouteWithChildren
   '/_admin/': typeof AdminIndexRoute
+  '/_admin/workers/$workerId': typeof AdminWorkersWorkerIdRoute
+  '/_admin/workers/': typeof AdminWorkersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -139,6 +165,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/prototype'
     | '/complaints'
+    | '/customers'
     | '/orders'
     | '/overview'
     | '/payments'
@@ -147,11 +174,14 @@ export interface FileRouteTypes {
     | '/settings'
     | '/users'
     | '/workers'
+    | '/workers/$workerId'
+    | '/workers/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
     | '/prototype'
     | '/complaints'
+    | '/customers'
     | '/orders'
     | '/overview'
     | '/payments'
@@ -159,14 +189,16 @@ export interface FileRouteTypes {
     | '/services'
     | '/settings'
     | '/users'
-    | '/workers'
     | '/'
+    | '/workers/$workerId'
+    | '/workers'
   id:
     | '__root__'
     | '/_admin'
     | '/login'
     | '/prototype'
     | '/_admin/complaints'
+    | '/_admin/customers'
     | '/_admin/orders'
     | '/_admin/overview'
     | '/_admin/payments'
@@ -176,6 +208,8 @@ export interface FileRouteTypes {
     | '/_admin/users'
     | '/_admin/workers'
     | '/_admin/'
+    | '/_admin/workers/$workerId'
+    | '/_admin/workers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -219,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/complaints'
       fullPath: '/complaints'
       preLoaderRoute: typeof AdminComplaintsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/customers': {
+      id: '/_admin/customers'
+      path: '/customers'
+      fullPath: '/customers'
+      preLoaderRoute: typeof AdminCustomersRouteImport
       parentRoute: typeof AdminRoute
     }
     '/_admin/orders': {
@@ -277,11 +318,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminWorkersRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/_admin/workers/': {
+      id: '/_admin/workers/'
+      path: '/'
+      fullPath: '/workers/'
+      preLoaderRoute: typeof AdminWorkersIndexRouteImport
+      parentRoute: typeof AdminWorkersRoute
+    }
+    '/_admin/workers/$workerId': {
+      id: '/_admin/workers/$workerId'
+      path: '/$workerId'
+      fullPath: '/workers/$workerId'
+      preLoaderRoute: typeof AdminWorkersWorkerIdRouteImport
+      parentRoute: typeof AdminWorkersRoute
+    }
   }
 }
 
+interface AdminWorkersRouteChildren {
+  AdminWorkersWorkerIdRoute: typeof AdminWorkersWorkerIdRoute
+  AdminWorkersIndexRoute: typeof AdminWorkersIndexRoute
+}
+
+const AdminWorkersRouteChildren: AdminWorkersRouteChildren = {
+  AdminWorkersWorkerIdRoute: AdminWorkersWorkerIdRoute,
+  AdminWorkersIndexRoute: AdminWorkersIndexRoute,
+}
+
+const AdminWorkersRouteWithChildren = AdminWorkersRoute._addFileChildren(
+  AdminWorkersRouteChildren,
+)
+
 interface AdminRouteChildren {
   AdminComplaintsRoute: typeof AdminComplaintsRoute
+  AdminCustomersRoute: typeof AdminCustomersRoute
   AdminOrdersRoute: typeof AdminOrdersRoute
   AdminOverviewRoute: typeof AdminOverviewRoute
   AdminPaymentsRoute: typeof AdminPaymentsRoute
@@ -289,12 +359,13 @@ interface AdminRouteChildren {
   AdminServicesRoute: typeof AdminServicesRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminUsersRoute: typeof AdminUsersRoute
-  AdminWorkersRoute: typeof AdminWorkersRoute
+  AdminWorkersRoute: typeof AdminWorkersRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminComplaintsRoute: AdminComplaintsRoute,
+  AdminCustomersRoute: AdminCustomersRoute,
   AdminOrdersRoute: AdminOrdersRoute,
   AdminOverviewRoute: AdminOverviewRoute,
   AdminPaymentsRoute: AdminPaymentsRoute,
@@ -302,7 +373,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminServicesRoute: AdminServicesRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminUsersRoute: AdminUsersRoute,
-  AdminWorkersRoute: AdminWorkersRoute,
+  AdminWorkersRoute: AdminWorkersRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
 }
 

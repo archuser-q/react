@@ -21,7 +21,7 @@ export const NAV_ITEMS: NavItem[] = [
   { path: '/', label: 'Tổng quan', icon: <DashboardOutlined /> },
   { path: '/orders', label: 'Đơn hàng', icon: <FileTextOutlined /> },
   { path: '/workers', label: 'Thợ', icon: <ToolOutlined /> },
-  { path: '/users', label: 'Người dùng', icon: <TeamOutlined /> },
+  { path: '/customers', label: 'Khách hàng', icon: <TeamOutlined /> },
   { path: '/complaints', label: 'Khiếu nại', icon: <AlertOutlined /> },
   { path: '/reviews', label: 'Đánh giá', icon: <StarOutlined /> },
   { path: '/payments', label: 'Thanh toán', icon: <WalletOutlined /> },

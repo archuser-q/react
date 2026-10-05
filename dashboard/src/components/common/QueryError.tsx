@@ -11,7 +11,7 @@ export function QueryError({ error, onRetry }: QueryErrorProps) {
     <Alert
       type="error"
       showIcon
-      title="Không tải được dữ liệu tổng quan"
+      title="Không tải được dữ liệu"
       description={message}
       action={
         onRetry && (
