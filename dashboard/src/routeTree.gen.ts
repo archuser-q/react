@@ -22,7 +22,6 @@ import { Route as AdminReviewsRouteImport } from './routes/_admin/reviews'
 import { Route as AdminServicesRouteImport } from './routes/_admin/services'
 import { Route as AdminSettingsRouteImport } from './routes/_admin/settings'
 import { Route as AdminUsersRouteImport } from './routes/_admin/users'
-import { Route as AdminWorkersRouteImport } from './routes/_admin/workers'
 import { Route as AdminWorkersIndexRouteImport } from './routes/_admin/workers/index'
 import { Route as AdminWorkersWorkerIdRouteImport } from './routes/_admin/workers/$workerId'
 
@@ -90,20 +89,15 @@ const AdminUsersRoute = AdminUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminWorkersRoute = AdminWorkersRouteImport.update({
-  id: '/workers',
-  path: '/workers',
+const AdminWorkersIndexRoute = AdminWorkersIndexRouteImport.update({
+  id: '/workers/',
+  path: '/workers/',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminWorkersIndexRoute = AdminWorkersIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AdminWorkersRoute,
-} as any)
 const AdminWorkersWorkerIdRoute = AdminWorkersWorkerIdRouteImport.update({
-  id: '/$workerId',
-  path: '/$workerId',
-  getParentRoute: () => AdminWorkersRoute,
+  id: '/workers/$workerId',
+  path: '/workers/$workerId',
+  getParentRoute: () => AdminRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -119,7 +113,6 @@ export interface FileRoutesByFullPath {
   '/services': typeof AdminServicesRoute
   '/settings': typeof AdminSettingsRoute
   '/users': typeof AdminUsersRoute
-  '/workers': typeof AdminWorkersRouteWithChildren
   '/workers/$workerId': typeof AdminWorkersWorkerIdRoute
   '/workers/': typeof AdminWorkersIndexRoute
 }
@@ -153,7 +146,6 @@ export interface FileRoutesById {
   '/_admin/services': typeof AdminServicesRoute
   '/_admin/settings': typeof AdminSettingsRoute
   '/_admin/users': typeof AdminUsersRoute
-  '/_admin/workers': typeof AdminWorkersRouteWithChildren
   '/_admin/': typeof AdminIndexRoute
   '/_admin/workers/$workerId': typeof AdminWorkersWorkerIdRoute
   '/_admin/workers/': typeof AdminWorkersIndexRoute
@@ -173,7 +165,6 @@ export interface FileRouteTypes {
     | '/services'
     | '/settings'
     | '/users'
-    | '/workers'
     | '/workers/$workerId'
     | '/workers/'
   fileRoutesByTo: FileRoutesByTo
@@ -206,7 +197,6 @@ export interface FileRouteTypes {
     | '/_admin/services'
     | '/_admin/settings'
     | '/_admin/users'
-    | '/_admin/workers'
     | '/_admin/'
     | '/_admin/workers/$workerId'
     | '/_admin/workers/'
@@ -311,43 +301,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/_admin/workers': {
-      id: '/_admin/workers'
-      path: '/workers'
-      fullPath: '/workers'
-      preLoaderRoute: typeof AdminWorkersRouteImport
-      parentRoute: typeof AdminRoute
-    }
     '/_admin/workers/': {
       id: '/_admin/workers/'
-      path: '/'
+      path: '/workers'
       fullPath: '/workers/'
       preLoaderRoute: typeof AdminWorkersIndexRouteImport
-      parentRoute: typeof AdminWorkersRoute
+      parentRoute: typeof AdminRoute
     }
     '/_admin/workers/$workerId': {
       id: '/_admin/workers/$workerId'
-      path: '/$workerId'
+      path: '/workers/$workerId'
       fullPath: '/workers/$workerId'
       preLoaderRoute: typeof AdminWorkersWorkerIdRouteImport
-      parentRoute: typeof AdminWorkersRoute
+      parentRoute: typeof AdminRoute
     }
   }
 }
-
-interface AdminWorkersRouteChildren {
-  AdminWorkersWorkerIdRoute: typeof AdminWorkersWorkerIdRoute
-  AdminWorkersIndexRoute: typeof AdminWorkersIndexRoute
-}
-
-const AdminWorkersRouteChildren: AdminWorkersRouteChildren = {
-  AdminWorkersWorkerIdRoute: AdminWorkersWorkerIdRoute,
-  AdminWorkersIndexRoute: AdminWorkersIndexRoute,
-}
-
-const AdminWorkersRouteWithChildren = AdminWorkersRoute._addFileChildren(
-  AdminWorkersRouteChildren,
-)
 
 interface AdminRouteChildren {
   AdminComplaintsRoute: typeof AdminComplaintsRoute
@@ -359,8 +328,9 @@ interface AdminRouteChildren {
   AdminServicesRoute: typeof AdminServicesRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminUsersRoute: typeof AdminUsersRoute
-  AdminWorkersRoute: typeof AdminWorkersRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
+  AdminWorkersWorkerIdRoute: typeof AdminWorkersWorkerIdRoute
+  AdminWorkersIndexRoute: typeof AdminWorkersIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
@@ -373,8 +343,9 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminServicesRoute: AdminServicesRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminUsersRoute: AdminUsersRoute,
-  AdminWorkersRoute: AdminWorkersRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
+  AdminWorkersWorkerIdRoute: AdminWorkersWorkerIdRoute,
+  AdminWorkersIndexRoute: AdminWorkersIndexRoute,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
