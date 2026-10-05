@@ -15,3 +15,20 @@ body {
   margin: 0;
 }
 
+
+body {
+  font-family: 'Be Vietnam Pro', 'Segoe UI', system-ui, sans-serif;
+}
+
+@media (max-width: 640px) {
+  .ant-card-head-wrapper {
+    flex-wrap: wrap;
+  }
+
+  .ant-card-extra {
+    margin-inline-start: 0;
+    padding-bottom: 12px;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}

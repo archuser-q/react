@@ -1,0 +1,116 @@
+.shell {
+  min-height: 100vh;
+}
+
+.sider {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 64px;
+  padding: 0 20px;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 8px;
+}
+
+.brandMark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #d9961a;
+  color: #1b2a3a;
+  font-size: 16px;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.brandText strong {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.brandText small {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e3e5e0;
+  line-height: 1.3;
+}
+
+.pageTitle {
+  margin: 0 !important;
+}
+
+.pageDate {
+  font-size: 13px;
+}
+
+.userButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.userButton:hover {
+  background: #f4f5f2;
+}
+
+.userButton:focus-visible {
+  outline: 2px solid #1f5f8b;
+  outline-offset: 2px;
+}
+
+.userMeta {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.3;
+}
+
+.userMeta small {
+  color: #6b7480;
+}
+
+.content {
+  padding: 24px;
+}
+
+@media (max-width: 640px) {
+  .content {
+    padding: 16px 12px;
+  }
+
+  .userMeta {
+    display: none;
+  }
+}

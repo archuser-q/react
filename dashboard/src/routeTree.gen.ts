@@ -9,50 +9,309 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/_admin'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as PrototypeRouteImport } from './routes/prototype'
+import { Route as AdminIndexRouteImport } from './routes/_admin/index'
+import { Route as AdminComplaintsRouteImport } from './routes/_admin/complaints'
+import { Route as AdminOrdersRouteImport } from './routes/_admin/orders'
+import { Route as AdminOverviewRouteImport } from './routes/_admin/overview'
+import { Route as AdminPaymentsRouteImport } from './routes/_admin/payments'
+import { Route as AdminReviewsRouteImport } from './routes/_admin/reviews'
+import { Route as AdminServicesRouteImport } from './routes/_admin/services'
+import { Route as AdminSettingsRouteImport } from './routes/_admin/settings'
+import { Route as AdminUsersRouteImport } from './routes/_admin/users'
+import { Route as AdminWorkersRouteImport } from './routes/_admin/workers'
 
-const IndexRoute = IndexRouteImport.update({
+const AdminRoute = AdminRouteImport.update({
+  id: '/_admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrototypeRoute = PrototypeRouteImport.update({
+  id: '/prototype',
+  path: '/prototype',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminComplaintsRoute = AdminComplaintsRouteImport.update({
+  id: '/complaints',
+  path: '/complaints',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrdersRoute = AdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOverviewRoute = AdminOverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReviewsRoute = AdminReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicesRoute = AdminServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminWorkersRoute = AdminWorkersRouteImport.update({
+  id: '/workers',
+  path: '/workers',
+  getParentRoute: () => AdminRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof AdminIndexRoute
+  '/login': typeof LoginRoute
+  '/prototype': typeof PrototypeRoute
+  '/complaints': typeof AdminComplaintsRoute
+  '/orders': typeof AdminOrdersRoute
+  '/overview': typeof AdminOverviewRoute
+  '/payments': typeof AdminPaymentsRoute
+  '/reviews': typeof AdminReviewsRoute
+  '/services': typeof AdminServicesRoute
+  '/settings': typeof AdminSettingsRoute
+  '/users': typeof AdminUsersRoute
+  '/workers': typeof AdminWorkersRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/prototype': typeof PrototypeRoute
+  '/complaints': typeof AdminComplaintsRoute
+  '/orders': typeof AdminOrdersRoute
+  '/overview': typeof AdminOverviewRoute
+  '/payments': typeof AdminPaymentsRoute
+  '/reviews': typeof AdminReviewsRoute
+  '/services': typeof AdminServicesRoute
+  '/settings': typeof AdminSettingsRoute
+  '/users': typeof AdminUsersRoute
+  '/workers': typeof AdminWorkersRoute
+  '/': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_admin': typeof AdminRouteWithChildren
+  '/login': typeof LoginRoute
+  '/prototype': typeof PrototypeRoute
+  '/_admin/complaints': typeof AdminComplaintsRoute
+  '/_admin/orders': typeof AdminOrdersRoute
+  '/_admin/overview': typeof AdminOverviewRoute
+  '/_admin/payments': typeof AdminPaymentsRoute
+  '/_admin/reviews': typeof AdminReviewsRoute
+  '/_admin/services': typeof AdminServicesRoute
+  '/_admin/settings': typeof AdminSettingsRoute
+  '/_admin/users': typeof AdminUsersRoute
+  '/_admin/workers': typeof AdminWorkersRoute
+  '/_admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/prototype'
+    | '/complaints'
+    | '/orders'
+    | '/overview'
+    | '/payments'
+    | '/reviews'
+    | '/services'
+    | '/settings'
+    | '/users'
+    | '/workers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/login'
+    | '/prototype'
+    | '/complaints'
+    | '/orders'
+    | '/overview'
+    | '/payments'
+    | '/reviews'
+    | '/services'
+    | '/settings'
+    | '/users'
+    | '/workers'
+    | '/'
+  id:
+    | '__root__'
+    | '/_admin'
+    | '/login'
+    | '/prototype'
+    | '/_admin/complaints'
+    | '/_admin/orders'
+    | '/_admin/overview'
+    | '/_admin/payments'
+    | '/_admin/reviews'
+    | '/_admin/services'
+    | '/_admin/settings'
+    | '/_admin/users'
+    | '/_admin/workers'
+    | '/_admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  PrototypeRoute: typeof PrototypeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_admin': {
+      id: '/_admin'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prototype': {
+      id: '/prototype'
+      path: '/prototype'
+      fullPath: '/prototype'
+      preLoaderRoute: typeof PrototypeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_admin/': {
+      id: '/_admin/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/complaints': {
+      id: '/_admin/complaints'
+      path: '/complaints'
+      fullPath: '/complaints'
+      preLoaderRoute: typeof AdminComplaintsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/orders': {
+      id: '/_admin/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof AdminOrdersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/overview': {
+      id: '/_admin/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof AdminOverviewRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/payments': {
+      id: '/_admin/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof AdminPaymentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/reviews': {
+      id: '/_admin/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof AdminReviewsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/services': {
+      id: '/_admin/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof AdminServicesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/settings': {
+      id: '/_admin/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/users': {
+      id: '/_admin/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/workers': {
+      id: '/_admin/workers'
+      path: '/workers'
+      fullPath: '/workers'
+      preLoaderRoute: typeof AdminWorkersRouteImport
+      parentRoute: typeof AdminRoute
     }
   }
 }
 
+interface AdminRouteChildren {
+  AdminComplaintsRoute: typeof AdminComplaintsRoute
+  AdminOrdersRoute: typeof AdminOrdersRoute
+  AdminOverviewRoute: typeof AdminOverviewRoute
+  AdminPaymentsRoute: typeof AdminPaymentsRoute
+  AdminReviewsRoute: typeof AdminReviewsRoute
+  AdminServicesRoute: typeof AdminServicesRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminWorkersRoute: typeof AdminWorkersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminComplaintsRoute: AdminComplaintsRoute,
+  AdminOrdersRoute: AdminOrdersRoute,
+  AdminOverviewRoute: AdminOverviewRoute,
+  AdminPaymentsRoute: AdminPaymentsRoute,
+  AdminReviewsRoute: AdminReviewsRoute,
+  AdminServicesRoute: AdminServicesRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminWorkersRoute: AdminWorkersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  LoginRoute: LoginRoute,
+  PrototypeRoute: PrototypeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
