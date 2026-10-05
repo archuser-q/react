@@ -1,0 +1,37 @@
+.line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  font-size: 14px;
+}
+
+.line > span:last-child {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.lineStrong {
+  font-weight: 600;
+}
+
+.quote {
+  padding: 6px 0;
+  border-bottom: 1px dashed #e3e5e0;
+}
+
+.payments {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.payments li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f1ee;
+}
+
+.payments li:last-child {
+  border-bottom: 0;
+}

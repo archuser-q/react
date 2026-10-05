@@ -71,6 +71,10 @@ export function RecentOrdersTable({ data, loading }: RecentOrdersTableProps) {
         loading={loading && !data}
         pagination={false}
         scroll={{ x: 860 }}
+        onRow={(o) => ({
+          onClick: () => router.history.push(`/orders/${o.id}`),
+          style: { cursor: 'pointer' },
+        })}
         locale={{ emptyText: 'Chưa có đơn hàng nào' }}
       />
     </SectionCard>

@@ -8,6 +8,12 @@ import type {
   Period,
   Severity,
 } from '#/types/dashboard'
+import type { 
+  MatchingMode, 
+  OfferStatus, 
+  PaymentStatus, 
+  QuoteStatus 
+} from '#/types/order'
 
 export const ORDER_STATUS: Record<OrderStatus, { label: string; color: string }> = {
   pending: { label: 'Chờ ghép thợ', color: 'gold' },
@@ -159,4 +165,48 @@ export const DOC_REJECT_REASONS = [
   'Giấy tờ đã hết hạn',
   'Ảnh bị cắt, thiếu góc',
   'Không phải giấy tờ được yêu cầu',
+]
+
+// ---------- Đơn hàng ----------
+
+export const CANCELLABLE_ORDER_STATUSES: OrderStatus[] = [
+  'pending',
+  'matched',
+  'accepted',
+  'on_the_way',
+  'arrived',
+  'in_progress',
+]
+
+export const MATCHING_MODE: Record<MatchingMode, string> = {
+  instant: 'Ghép tức thời',
+  batch: 'Ghép theo lô',
+}
+
+export const OFFER_STATUS: Record<OfferStatus, { label: string; color: string }> = {
+  sent: { label: 'Đang chờ', color: 'gold' },
+  accepted: { label: 'Đã nhận', color: 'success' },
+  rejected: { label: 'Từ chối', color: 'error' },
+  expired: { label: 'Hết hạn', color: 'default' },
+}
+
+export const QUOTE_STATUS: Record<QuoteStatus, { label: string; color: string }> = {
+  pending: { label: 'Chờ khách duyệt', color: 'gold' },
+  approved: { label: 'Khách đồng ý', color: 'success' },
+  rejected: { label: 'Khách từ chối', color: 'error' },
+}
+
+export const PAYMENT_STATUS: Record<PaymentStatus, { label: string; color: string }> = {
+  pending: { label: 'Chờ thanh toán', color: 'gold' },
+  success: { label: 'Thành công', color: 'success' },
+  failed: { label: 'Thất bại', color: 'error' },
+  refunded: { label: 'Đã hoàn tiền', color: 'default' },
+}
+
+export const ORDER_CANCEL_REASONS = [
+  'Khách yêu cầu hủy qua tổng đài',
+  'Không tìm được thợ phù hợp',
+  'Thợ không thể đến đúng hẹn',
+  'Đơn đặt trùng',
+  'Thông tin đơn không chính xác',
 ]
