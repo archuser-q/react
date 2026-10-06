@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ComingSoon } from '#/components/common/ComingSoon'
+import { MatchingConfigPage } from '#/pages/matching/MatchingConfigPage'
 
 export const Route = createFileRoute('/_admin/settings')({
-  component: () => <ComingSoon title="Cấu hình ghép thợ" />,
+  component: MatchingConfigPage,
 })

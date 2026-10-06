@@ -1,0 +1,145 @@
+/* ---------- Thanh trọng số ---------- */
+
+.bar,
+.scoreBar {
+  display: flex;
+  overflow: hidden;
+  height: 10px;
+  border-radius: 5px;
+  background: #eef0ec;
+}
+
+.bar span,
+.scoreBar span {
+  display: block;
+  height: 100%;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #6b7480;
+}
+
+.legend span,
+.sliderLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend i,
+.sliderLabel i,
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.dot {
+  margin-right: 6px;
+  vertical-align: -1px;
+}
+
+/* ---------- Danh sách cấu hình ---------- */
+
+.configs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+.cardActive {
+  box-shadow: inset 0 0 0 2px #2e8b57;
+}
+
+.params {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  margin: 16px 0 12px;
+  font-size: 14px;
+}
+
+.params dt {
+  color: #6b7480;
+  font-size: 13px;
+}
+
+.params dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+.cardFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f1ee;
+}
+
+/* ---------- Thanh kéo trọng số ---------- */
+
+.sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sliderRow {
+  display: grid;
+  grid-template-columns: 150px 1fr 80px;
+  align-items: center;
+  gap: 12px;
+}
+
+.sumRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0 10px;
+}
+
+/* ---------- Mô phỏng ---------- */
+
+.simGrid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.2fr);
+  gap: 16px 40px;
+}
+
+@media (max-width: 900px) {
+  .simGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.customToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.totalCell {
+  display: grid;
+  grid-template-columns: 1fr 40px;
+  align-items: center;
+  gap: 8px;
+}
+
+.totalCell strong {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.offerRow td {
+  background: #f1f8f4 !important;
+}
